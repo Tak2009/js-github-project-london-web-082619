@@ -5,7 +5,7 @@ const gitForm = document.querySelector("#github-form");
 //add event to submit button
 gitForm.addEventListener("submit", function(event){
     event.preventDefault();
-    API.getUsers(gitForm.search.value)//getUsersをコール
+    API.getUsers(event.target.search.value)//getUsersをコール = (gitForm.search.value)
     .then(users => renderUsers(users));//受け取った後の.then. 
 });
 
@@ -24,10 +24,17 @@ const renderUser = function(user){
     const li = document.createElement("li");
     li.id = user.login;
     li.innerText = user.login;
+    li.addEventListener("click", function(event){//Repo取得
+        renderRepos(userName);
+    });
     const img = document.createElement("img");
     img.src = user.avatar_url
     const p = document.createElement("p");
     p.innerText = user.url;
     div.append(li,img,p);
     userList.appendChild(div);
+};
+
+const renderRepos = function(userName){
+    API.
 }
